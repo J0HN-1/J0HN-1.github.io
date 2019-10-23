@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <title>PSSH Parser</title>
+</head>
+
+<body style="padding: 1.5rem">
+
+  <div class="container">
+
+    <div class="form-row form-group">
+      <textarea id="pssh_text" class="form-control col-md-8 offset-md-2" type="text" placeholder="PSSH" rows="3"></textarea>
+    </div>
+
+    <div class="form-row form-group">
+      <button type="button" id="pssh_parse" class="btn btn-success col-md-2 offset-md-3">Parse</button>
+      <button type="button" id="pssh_serialize" class="btn btn-primary col-md-2 offset-md-2">Serialize</button>
+    </div>
+
+    <h2 class="col-md-2 offset-md-5">PSSH Box</h2>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="ver_0" name="ver" class="custom-control-input" checked >
+        <label class="custom-control-label" for="ver_0">Version 0</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="ver_1" name="ver" class="custom-control-input">
+        <label class="custom-control-label" for="ver_1">Version 1</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pssh_flags">Flags</label>
+      <input type="text" class="form-control" id="pssh_flags" value="000000">
+    </div>
+
+    <div class="form-group">
+      <label for="pssh_key_ids">Key ID/s (comma separated list)</label>
+      <input type="text" class="form-control" id="pssh_key_ids" disabled>
+    </div>
+
+
+    <h2 class="col-md-4 offset-md-5">Widevine Data</h2>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-1">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_alg">
+        <label class="custom-control-label" for="include_pssh_alg">Algorithm</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="alg_0" name="alg" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="alg_0">UNECRYPTED</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="alg_1" name="alg" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="alg_1">AES-CTR</label>
+      </div>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_keys">
+        <label class="custom-control-label" for="include_pssh_data_keys">Key ID/s (comma separated list)</label>
+      </div>
+      <input type="text" class="form-control" id="pssh_data_key_ids" disabled>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_content_id">
+        <label class="custom-control-label" for="include_pssh_data_content_id">Content ID (HEX)</label>
+      </div>
+      <input type="text" class="form-control" id="content_id" disabled>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_track_type">
+        <label class="custom-control-label" for="include_pssh_data_track_type">Track Type</label>
+      </div>
+      <input type="text" class="form-control" id="track_type" disabled>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_provider">
+        <label class="custom-control-label" for="include_pssh_data_provider">Provider</label>
+      </div>
+      <input type="text" class="form-control" id="provider" disabled>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_policy">
+        <label class="custom-control-label" for="include_pssh_data_policy">Policy</label>
+      </div>
+      <input type="text" class="form-control" id="policy" disabled>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="custom-control custom-switch col-md-3">
+        <input type="checkbox" class="custom-control-input" id="include_pssh_data_encryption">
+        <label class="custom-control-label" for="include_pssh_data_encryption">Encryption Scheme</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="cenc" name="encryption" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="cenc">cenc</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="cbc1" name="encryption" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="cbc1">cbc1</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="cens" name="encryption" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="cens">cens</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="cbcs" name="encryption" class="custom-control-input" disabled>
+        <label class="custom-control-label" for="cbcs">cbcs</label>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./dist/bundle.js"></script>
+
+</body>
+
+</html>
